@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat');
+
+html,
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 100;
+}
+
+footer dl {
+    display: grid;
+    grid-template-columns: fit-content(50%) auto;
+}
+
+footer dl dd {
+    text-align: left;
+}
+
+.note {
+    background-color: #F8F8F8;
+    padding: 0.5em;
+    border-radius: 5px;
+    font-size: 0.85em;
+    width: fit-content;
+}
