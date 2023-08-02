@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, intial-scale=1">
+
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="/site.css">
+</head>
+
+<body>
+    <section class="page">
+        <h4>Converting between bases</h4>
+        Binary to hexadecimal, group into 4 but start from the right so that if not divisible by 4 then the first group
+        has
+        the missing numbers
+        <table class="numerical">
+            <tr>
+                <td>binary</td>
+                <td>11</td>
+                <td>1100</td>
+                <td>1010</td>
+                <td>1101</td>
+                <td>1011</td>
+                <td>0011</td>
+            </tr>
+            <tr>
+                <td>hexadecimal</td>
+                <td>3</td>
+                <td>C</td>
+                <td>A</td>
+                <td>D</td>
+                <td>B</td>
+                <td>3</td>
+            </tr>
+        </table>
+
+        <h4>size matters</h4>
+        <p>if you are long on a 32 bit system your only 4 bytes, on 64 bit system thats a more impressive 8</p>
+        <p>
+            ISO C99 provided types that are the same size regardless if compiled for 32 or 64 bit systems
+            <code>int32_t</code>
+            <code>int64_t</code>
+        </p>
+
+        <h4>Addressing and byte order</h4>
+
+        <p>hexadecimal value <code>0x01234567</code> stored at address 0x100</p>
+        <img src="/img/representation/endian.png" />
+        <ul>
+            <li>Intel is little-endian</li>
+            <li>ARM is bi-endian but Android and IOS are little-endian</li>
+        </ul>
+
+        <p>Networking uses big-endianess</p>
+
+        <section class="aside">
+            term comes from Gullivers's travels about cracking eggs (big or little end[ian])
+        </section>
+
+
+        <section>
+            <h4>Boolean algebra</h4>
+            <h5>bit-level operators</h5>
+            <table>
+                <tr>
+                    <td>NOT</td>
+                    <td>~</td>
+                    <td>¬</td>
+                </tr>
+                <tr>
+                    <td>AND</td>
+                    <td>&</td>
+                    <td>∧</td>
+                </tr>
+                <tr>
+                    <td>OR</td>
+                    <td>|</td>
+                    <td>∨</td>
+                </tr>
+                <tr>
+                    <td>EXCLUSIVE OR</td>
+                    <td>^</td>
+                    <td>⊕</td>
+                </tr>
+            </table>
+            <p>a & (b | c) = (a & b) | (a & c)</p>
+            <p>a | (b & c) = (a | b) & (a | c)</p>
+
+            <p>
+                There is a difference with right shifting >>
+                These can be logical or arithmetic, logical simply fills the left with zero
+                But arithemtic fills with the significant bit, so could be 1s
+
+            </p>
+
+            <h4>Two's compliment</h4>
+            <p>
+                When the sign bit is 1 the value is negative.
+                Two compliment is asymetric, the min value is one more than the max value.
+                This is due to 0 considered as nonnegative
+            </p>
+            <table class="numerical">
+                <tr>
+                    <td>0101</td>
+                    <td>-0x2^3 + 1x2^2 + 0x2^1 + 1x2^0</td>
+                    <td>0 + 4 + 0 + 1</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>1011</td>
+                    <td>-1x2^3 + 0x2^2 + 1x2^1 + 1x2^0</td>
+                    <td>-8 + 0 + 2 + 1</td>
+                    <td>-5</td>
+                </tr>
+            </table>
+        </section>
+    </section>
+</body>
+
+</html>

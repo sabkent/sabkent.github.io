@@ -22,3 +22,31 @@ footer dl dd {
     font-size: 0.85em;
     width: fit-content;
 }
+
+table.numerical td {
+    text-align: right;
+}
+
+table.numerical td:first-child {
+    background-color: #c0c0c0;
+}
+
+section.page {
+    width: 800px;
+    margin: 0 auto;
+}
+
+section.aside {
+    font-size: 0.8em;
+    background-color: #F8F8F8;
+    padding: 0.2em;
+}
+
+dl {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+dl>dt {
+    text-align: right;
+}
