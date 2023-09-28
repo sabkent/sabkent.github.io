@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, intial-scale=1">
+
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="/site.css">
+
+</head>
+
+<body>
+    <section class="page">
+        <p>diffusion. avalance effect. key schedule</p>
+        <h3>Advanced Encryption Standard (AES)</h3>
+        <p>
+            Takes 128 bits of plaintext and produces 128 bit cipher text
+            These fixed size blocks are why this is a block cipher
+            A Block Cipher with a Key is technically called a permutation, but permutation is a mapping from every
+            128
+            bit plaintext to cipher text.
+            The memory for that permutation dictionary is impractical, AES acts like a pseudorandom permitation
+        </p>
+        <p>
+            The 128 bit plaintext is 16 bytes which is represented as 4x4 matrix column first fill
+            <img src="/img/security/block_plaintext.png" />
+        </p>
+        <p>
+            AES passes plaintext through round functions multiple times to encrypt.
+            The round function consists of the following operations:
+            SubBytes, ShiftRows, MixColumns, AddRoundKey. All the operation are reverable except for the last one
+            which is an XOR with the round key
+        </p>
+        <p>
+            All block cipher deal with fixed block size so when your data doesn't
+            fit padding is used. A block is 16 bytes if your data was 8 bytes then you
+            would need 8 bytes of padding... so the padding value of 8 is written 8 times to pad.
+            If no padding was required by your data then a complete block (16 bytes) of value 16 would be appended
+            This is the most popular approach and is standardized in PKCS#7 padding
+        </p>
+        <p>
+            Mode of operation
+            ECB electronic codebook is a naive implementation whereby the plaintext is broken into 16 bytes blocks
+            the same plaintext results in the same ciphertext (permutation)
+            so the cipher can reveal repeating patterns (ECB Penguin)
+        </p>
+        <p>
+            So a better mode is CBC Cipher block chaining
+            This requires an IV intialization vector, this is a random bit of data the size of the block
+            The first block is XOR with the IV before encrypting
+            The resulting cipher text then becomes the IV for the next block
+            Nothing is leaked by revealing the IV and so it is transmitted with the ciphertext in plaintext
+        </p>
+        <p>
+            AES is authenciated by using HMAC over ciphertext and IV, this is Encrypt-then-MAC,
+            the alternative MAC-then-Encrypt opens up attack vector.
+            The resultant authentication tag is transmitted along with cipher text and IV
+            in the order IV CIPHER TAG. This combination is called AES-CBC-HMAC and has been replaced but is still
+            widely in use
+        </p>
+        <p>
+            AEAD Authenticated Encryption with Associated Data
+            Associated Data is optional and sent unencrypted or is implied
+            AES-GCM is an AEAD that uses GMAC. Galois/Counter mode.
+            It is the TLS standard.
+            AES-CTR use AES to encrypt a nonce concatenated with a counter (starting at 1) NOT the plaintext this
+            is then used in a similar way to an IV from CBC. A nonce CAN be predictable.
+            The nonce+counter encryped is called a keystream and it is XOR'd with the plaintext to produce a cipher
+            text
+            A nonce in AES-CTR is 96 bits (12 bytes. see js) the remaining 4 bytes (32 bits) serves as a counter,
+            the highest values counter is what limits AES-CTR to under 69 GBs. If the keystream is longer than the
+            plaintext it is truncated, so no padding is used with AES-CTR so this isn't a block cipher its a
+            stream cipher. Compression before encryption opens an attack vector if attacker can influence the
+            plaintext
+        </p>
+        <p>
+            GMAC is a MAC constructed from a keyed hash (GHASH)
+            This is an almost XOR'd universal hash (AXU) (AKA difference unpredicatable function DUF)
+            These hashes dont require collision resistance so are faster.
+            To hash something with GHASH the data is broken down into blocks of 16 bytes then hash similar
+            to CBC
+        </p>
+    </section>
+</body>
+
+</html>
