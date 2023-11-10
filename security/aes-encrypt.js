@@ -1,29 +1,35 @@
 //Web Crypto API
-let config = {
-    name: 'AES-GCM',
-    length: 128
-};
 
-let keyUsages = ['encrypt', 'decrypt'];
+encryptWithAESGCM = async () => {
 
-let key = await crypto.subtle.generateKey(config, false, keyUsages);
+    let config = {
+        name: 'AES-GCM',
+        length: 128
+    };
 
-let iv = new Uint8Array(12);
+    let keyUsages = ['encrypt', 'decrypt'];
 
-await crypto.getRandomValues(iv);
+    let key = await crypto.subtle.generateKey(config, false, keyUsages);
 
-let te = new TextEncoder();
-let ad = te.encode("some associated data");
-let plaintext = te.encode("hello world");
+    let iv = new Uint8Array(12);
 
-let param = {
-    name: 'AES-GCM',
-    iv: iv,
-    additionalData: ad
-};
+    await crypto.getRandomValues(iv);
 
-let cipherText = await crypto.subtle.encrypt(param, key, plaintext);
+    let te = new TextEncoder();
+    let ad = te.encode("some associated data");
+    let plaintext = te.encode("hello world");
 
-let result = await crypto.subtle.decrypt(param, key, cipherText);
+    let param = {
+        name: 'AES-GCM',
+        iv: iv,
+        additionalData: ad
+    };
 
-new TextDecoder("utf-8").decode(result);
+    let cipherText = await crypto.subtle.encrypt(param, key, plaintext);
+
+    let result = await crypto.subtle.decrypt(param, key, cipherText);
+
+    let fishPaste = new TextDecoder("utf-8").decode(result);
+
+    console.log(fishPaste);
+}

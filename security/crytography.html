@@ -3,11 +3,18 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, intial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="/normalize.css">
     <link rel="stylesheet" href="/site.css">
 
+    <script src="/security/aes-encrypt.js"></script>
+
+    <script>
+        demoAESGCM = () => {
+            encryptWithAESGCM();
+        };
+    </script>
 </head>
 
 <body>
@@ -80,6 +87,19 @@
             These hashes dont require collision resistance so are faster.
             To hash something with GHASH the data is broken down into blocks of 16 bytes then hash similar
             to CBC
+        </p>
+
+        <p>
+            <button onclick="demoAESGCM()">Do web crypto</button>
+        </p>
+
+        <p>
+            Birthday bound, dont use random nonce with same key for more than 2^30 messages
+
+        </p>
+        <p>
+        <h3>ChaCha20-Poly1305</h3>
+        ChaCha20 stream ciper and Polcy1305 MAC, widely adopted in OpenSSH, TLS, Noise
         </p>
     </section>
 </body>
