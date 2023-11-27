@@ -1,1 +1,35 @@
+<!doctype html>
+<html lang="en">
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, intial-scale=1">
+
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="/site.css">
+
+</head>
+
+<body>
+    <section class="page">
+      <h2>Identity</h2>
+
+      <h3>Cookie-based</h3>
+      <p>
+        Browser handles the back and forth of the cookie data so the server can use it to make authorization decisions
+        <ul>
+          <li>Tied to a domain, not suitable for multi domain applications</li>
+          <li>Vulnerable to CRSF and XSS</li>
+        </ul>
+      </p>
+      <h3>Token-based</h3>
+      <p>
+        <ul>
+          <li>Managment and secuity is left to the developer</li>
+          <li>Invalidation of the token can be a problem </li>
+        </ul>
+      </p>
+    </section>
+</body>
+
+</html>
