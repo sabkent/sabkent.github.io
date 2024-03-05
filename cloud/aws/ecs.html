@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, intial-scale=1">
+
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="/site.css">
+
+</head>
+
+<body>
+    <section class="page">
+        <p>
+            Deploying an update the load balancer is used to check the health of new containers before considering them reading.
+          Target Groups have HealthyThreshold (5) and Interval (30) which means the LB will need to make 5 calls that succeed before considering the container ready, these defaults result in a 2 minute 30 second wait.
+        </p>
+      <p>
+        When old containers are being torn down the LB also has a delay for keep-alive connections to finish.
+        This is called the deregistraion delay and its default it 5 minutes.
+      </p>
+    </section>
+</body>
+
+</html>
