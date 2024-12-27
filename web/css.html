@@ -28,6 +28,32 @@
                 <li>class (.some-class)</li>
                 <li>tag/type (&lthtml&gt>) </li>
             </ul>
+        the ruleset itself can we due to being more specific, using more selectors with the weighting from above
+        Notation of specificity:
+            <div>
+            (id count), (class count), (tag count)
+            </div>
+            <table>
+                <tr><td>html body header h1</td><td>0,0,4</td></tr>
+                <tr><td>body header.page-header h1</td><td>0,1,3</td></tr>
+                <tr><td>.page-header .title</td><td>0,2,0</td></tr>
+                <tr><td>#page-title</td><td>1,0,0</td></tr>
+            </table>
+            #page-title wins! table is in reverse order of specificity
+            Some properties are inherited from parents if no cascade value is calcualted, mostly text base properties and list styles
+        </p>
+        <p>
+            initial, inherit, auto, unset, revert
+        </p>
+        <p>
+            Shorthand provides default value for properties you dont provide, this will override other properties which can be confusing.
+            The order for things like margin and padding are clockwise from the TOP. so TOP, RIGHT, BOTTOM, LEFT
+            some properties act like cartesian plane (x y coords) and start horizontally then verticaly
+            <span class="code-snippet">
+                box-shadow: 10px 2px #cc</br>
+                background-position: 25% 75%
+            </span>
+            
         </p>
         <img href="/img/web/css/css-cascade.png" alt="css cascade rules" />
     </section>
